@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo dos Frascos</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="timer-container">
+        <h1 class="timer__text open-sans">0:00</h1>
+    </div>
+
+    <div class="frascos-container"></div>
+
+    <div class="backdrop-container" id="introModal">
+        <div class="modal-container">
+            <div class="modal__header">
+                <h1 class="open-sans">Bem vindo ao Jogo dos Frascos!</h1>
+            </div>  
+
+            <div class="modal__body">
+                <div class="open-sans">
+                    <p>
+                    Seu objetivo é: <b>Organizar todos os frascos de modo que coloque as esferas do respectivo frasco no seu frasco oposto.</b>
+                    Dependendo da dificuldade, esta missão pode ficar mais dificil. 
+                    </p>
+
+                    <p>Escolha Sua dificuldade:</p>
+                </div>
+
+                <div class="button-container open-sans">
+                    <div>
+                        <button class="difficult__button" id="easyMode">Fácil</button>
+                        <button class="difficult__button" id="normalMode">Médio</button>
+                        <button class="difficult__button" id="hardMode">Dificil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="backdrop-container" id="winModal">
+        <div class="modal-container">
+            <div class="modal__header">
+                <h1 class="open-sans">Você ganhou!</h1>
+            </div>  
+
+            <div class="modal__body">
+                <h2 class="open-sans">Parabéns você venceu o jogo.</h2>
+                <p class="open-sans">Gostaria de jogar novamente?</p>
+
+                <div class="buttons-container">
+                    <button class="play__button">Jogar Novamente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="backdrop-container" id="loseModal">
+        <div class="modal-container">
+            <div class="modal__header">
+                <h1 class="open-sans">Você perdeu!</h1>
+            </div>  
+
+            <div class="modal__body">
+                <h2 class="open-sans">Que pena, continue tentando.</h2>
+                <p class="open-sans">Gostaria de jogar novamente?</p>
+
+                <div class="buttons-container">
+                    <button class="play__button">Jogar Novamente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="frasco.js"></script>
+</body>
+</html>
