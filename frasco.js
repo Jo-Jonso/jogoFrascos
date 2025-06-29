@@ -15,6 +15,10 @@ class Jogo {
         this.FPS = 1000/60;
         this.timer = 0;
         this.emJogo = false;
+        this.esferaMao = null; //Esfera que está na mão do jogador
+        this.esferaPosta = null; //Esfera colocada no frasco
+        this.frascoOrigem = null; //Frasco de origem onde é capturada a esfera
+        this.frascoAlvo = null; //Frasco alvo onde posso colocar a esfera
     }
     //Função que adiciona frascos dentro de uma matriz
     adicionarFrascos() {
@@ -90,6 +94,12 @@ class Jogo {
                 this.adicionarEsferas(this.frascos[2].conteudo,"🟤");
                 this.dificuldade = escolherDificuldade;
                 this.escolhoDificuldade = false;
+
+                this.esferaMao = null; //Esfera que está na mão do jogador
+                this.esferaPosta = null; //Esfera colocada no frasco
+                this.frascoOrigem = null; //Frasco de origem onde é capturada a esfera
+                this.frascoAlvo = null; //Frasco alvo onde posso colocar a esfera
+
                 this.timer = 60;
                 this.atualizarContador();
                 break;
@@ -100,6 +110,12 @@ class Jogo {
                 this.esferasAleatorias(this.frascos[0].conteudo,this.frascos[2].conteudo);
                 this.dificuldade = escolherDificuldade;
                 this.escolhoDificuldade = false;
+
+                this.esferaMao = null; //Esfera que está na mão do jogador
+                this.esferaPosta = null; //Esfera colocada no frasco
+                this.frascoOrigem = null; //Frasco de origem onde é capturada a esfera
+                this.frascoAlvo = null; //Frasco alvo onde posso colocar a esfera
+
                 this.timer = 45;
                 this.atualizarContador();
                 break;  
@@ -112,6 +128,12 @@ class Jogo {
                 this.esferasAleatoriasDificil(this.frascos[0].conteudo,this.frascos[2].conteudo,this.frascos[3].conteudo);
                 this.dificuldade = escolherDificuldade;
                 this.escolhoDificuldade = false;
+
+                this.esferaMao = null; //Esfera que está na mão do jogador
+                this.esferaPosta = null; //Esfera colocada no frasco
+                this.frascoOrigem = null; //Frasco de origem onde é capturada a esfera
+                this.frascoAlvo = null; //Frasco alvo onde posso colocar a esfera
+                
                 this.timer = 30;
                 this.atualizarContador();
                 break;
@@ -145,11 +167,6 @@ class Jogo {
     }
 }
 class Interface extends Jogo {
-    esferaMao = null; //Esfera que está na mão do jogador
-    esferaPosta = null; //Esfera colocada no frasco
-    frascoOrigem = null; //Frasco de origem onde é capturada a esfera
-    frascoAlvo = null; //Frasco alvo onde posso colocar a esfera
-
     desenharFrascos() { //Desenhando frascos na tela do jogador
         const frascosContainer = document.querySelector(".frascos-container");
 
