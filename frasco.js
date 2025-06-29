@@ -168,6 +168,7 @@ class Interface extends Jogo {
     desenharEsferas() { //Desenhando esferas na tela do jogador
         let frascoUI = document.querySelectorAll(".frasco-container");
         let frascosJogo = this.frascos;
+        
 
         for(let i = 0;i<frascosJogo.length;i++) {
             let esferas = frascosJogo[i].conteudo;
@@ -177,7 +178,6 @@ class Interface extends Jogo {
                     esferaDiv.className = "esfera amarela";
 
                     frascoUI[i].appendChild(esferaDiv);
-
                 }else if (esferas[j] == "🟤") {
                     let esferaDiv = document.createElement("div");
                     esferaDiv.className = "esfera marrom";
@@ -265,7 +265,7 @@ class Interface extends Jogo {
     }
     abrirModal(modalSelecionado) {
         let modal = document.querySelector(modalSelecionado);
-        
+
         modal.style.display = "flex";
     }
     fecharModal(modalSelecionado) {
@@ -279,15 +279,33 @@ class Interface extends Jogo {
 
         frascos.forEach(frasco => {
             frasco.addEventListener("click", () => {
-                if (UI.emJogo == true) {
-                    if (UI.frascoOrigem == null) {
-                        UI.pegarEsferas(frasco.getAttribute("indice-frasco"));
+                if (this.emJogo == true) {
+                    if (this.frascoOrigem == null) {
+                        this.pegarEsferas(frasco.getAttribute("indice-frasco"));
                     }else {
-                        UI.colocarEsferas(frasco.getAttribute("indice-frasco"))
+                        this.colocarEsferas(frasco.getAttribute("indice-frasco"))
                     }
                 }
             })
         });
+    }
+
+    eventoComecarJogo(dificuldade) {
+            this.fecharModal("#introModal");
+
+            this.escolhendoDificuldade(dificuldade);
+            this.desenharFrascos();
+            this.desenharEsferas();
+            this.atualizarTela();
+
+            this.eventoColocarEsfera();
+
+            timerInterval = setInterval(() => {
+                UI.timer--; 
+                UI.atualizarContador();
+            }, 1000);
+
+            gameInterval = setInterval(gameloop,this.FPS);
     }
 
 }
@@ -308,60 +326,18 @@ window.addEventListener("load",() => {
 
     if (botaoFacil) {
         botaoFacil.addEventListener("click",() => {
-            UI.fecharModal("#introModal");
-
-            UI.escolhendoDificuldade(1);
-            UI.desenharFrascos();
-            UI.desenharEsferas();
-            UI.atualizarTela();
-
-            UI.eventoColocarEsfera();
-
-            timerInterval = setInterval(() => {
-                UI.timer--; 
-                UI.atualizarContador();
-            }, 1000);
-
-            myInterval = setInterval(gameloop,UI.FPS);
+            UI.eventoComecarJogo(1);
         })
     }
     if (botaoMedio) {
-            botaoMedio.addEventListener("click",() => {
-            UI.fecharModal("#introModal");
-
-            UI.escolhendoDificuldade(2);
-            UI.desenharFrascos();
-            UI.desenharEsferas();
-            UI.atualizarTela();
-            
-            UI.eventoColocarEsfera();
-
-            timerInterval = setInterval(() => {
-                UI.timer--; 
-                UI.atualizarContador();
-            }, 1000);
-
-            myInterval = setInterval(gameloop,UI.FPS);
+        botaoMedio.addEventListener("click",() => {
+            UI.eventoComecarJogo(2);
         })
 
     }
     if (botaoDificil) {
-        
         botaoDificil.addEventListener("click",() => {
-            UI.fecharModal("#introModal");
-            UI.escolhendoDificuldade(3);
-            UI.desenharFrascos();
-            UI.desenharEsferas();
-            UI.atualizarTela();
-
-            UI.eventoColocarEsfera();
-
-            timerInterval = setInterval(() => {
-                UI.timer--; 
-                UI.atualizarContador();
-            }, 1000);
-
-            myInterval = setInterval(gameloop,UI.FPS);
+            UI.eventoComecarJogo(3);
         })
     }
 
@@ -379,22 +355,22 @@ window.addEventListener("load",() => {
 })
 
 //Gameloop do jogo
-let myInterval, timerInterval;
+let gameInterval, timerInterval;
 
 let gameloop = () => {
     if (UI.verificarVitoria() == true && UI.emJogo == true) {
         UI.abrirModal("#winModal");
-        clearInterval(myInterval);
+        clearInterval(gameInterval);
         clearInterval(timerInterval);
         UI.emJogo = false;
     };
 
     if (UI.verificarDerrota() == true && UI.emJogo == true) {
         UI.abrirModal("#loseModal");
-        clearInterval(myInterval);
+        clearInterval(gameInterval);
         clearInterval(timerInterval);
         UI.emJogo = false;
     }
 }
 
-myInterval = setInterval(gameloop,UI.FPS);
+gameInterval = setInterval(gameloop,UI.FPS);
